@@ -7,6 +7,4 @@ class Unit(object):
 	'''
 
 	def __init__(self, unit_stats_dict):
-	self.unit_stats = unit_stats;
-
-
+		self.unit_stats = unit_stats
