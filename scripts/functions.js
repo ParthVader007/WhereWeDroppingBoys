@@ -99,6 +99,7 @@ function click_handler(num) {
 
 function button1() {
     if (mode == START) {
+        kill_count = 0;
         hero = new Player("Player", 120, 15, 0);
         enemy_hp = getRandomArbitrary(60, 180);
         enemy_atk = getRandomArbitrary(5, 10)
