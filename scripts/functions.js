@@ -1,117 +1,109 @@
-function start_new_game()
-{
-  var hero = create_unit("Hero", 50, 10, 5);
-  hero = first_part();
-}
+var mode = 0;
+var START = 0;
+var ATTACK = 1;
+var STORY = 2;
+var text1 = [];
+var button = [];
+var i = 0;
 
+var hero_hp = 100;
+var hero_atk = 10;
+var enemy_hp = 50;
+var enemy_atk = 10;
 
-//document.getElementById("button1").onclick = function() {button1Click()};
-function button1Click() {
-  document.getElementById("button1").innerHTML = "YOU CLICKED ME!";
-}
+text1[0] = "You have just woken up. You feel pain from the back of your head. As you sit up, you take a glance at your surroundings. You have almost no recollection of where you are or who you are.";
+button[0] = "Get Up";
 
+text1[1] = "Just as you gather your thoughts, an orc bursts through the trees and lets out a furious war cry. You don't understand why the orc is angry or what he has against you, but instead of trying to figure that out you grab a nearby stick and prepare for combat.";
+button[1] = "Prepare for combat";
 
-var scenarios = [];
-var options = [[],[]];
+var hero = create_unit("Hero", 100, 20, 0);
 
-scenarios[0] = "You have just woken up. You feel pain from the back of your head. As you sit up, you take a glance at your surroundings. You have almost no recollection of where you are or who you are.";
-options[0][0] = "Get Up";
-options[0][1] = "Go back to sleep";
-options[0][2] = "";
-options[0][3] = "";
-
-scenarios[1] = "Just as you gather your thoughts, an orc bursts through the trees and lets out a furious war cry. You don't understand why the orc is angry or what he has against you, but instead of trying to figure that out you grab a nearby stick and prepare for combat.";
-options[1][0] = "Prepare for combat";
-options[1][1] = "Go back to sleep";
-options[1][2] = "";
-options[1][3] = "";
-
-scenarios[1] = "You wake up even more confused and disoriented in an orc camp. Your arms and hands are bound together. “Hey” You turn your head to look at the source of the greeting and your eyes fall upon the image of a starved and malnourished man. As you focus your eyes, you realize you are in a tent of sorts. You also start to focus upon the smell of rotting flesh and human excrement. “So boy, you new here”? You start to open your mouth but then realize."
-options[1][0] = "";
-options[1][1] = "";
-options[1][2] = "";
-options[1][3] = "";
-
-
-function first_part(hero)
-{
-  var text1 = "You have just woken up. You feel pain from the back of your head.";
-  var text2 = "As you sit up, you take a glance at your surroundings. You have almost no recollection of where you are or who you are.";
-  var text3 = "What would you like your name to be?"
-  hero.name = getname();
-}
-
-function create_unit(name, health, attack, defense, mode)
-{
-	var unit = {};
-  unit.name = name;
-  unit.health = health;
-  unit.attack = attack;
-  unit.defense = defense;
-  unit.mode = mode;
-
-  unit.take_damage = function(enemy_attack) {
-      var damage = enemy_attack - unit.defense;
-      if (damage < 0)
-      {
-        damage = 0;
-      }
-      unit.health = unit.health - damage;
-  }
-
-  unit.take_reduced_damage = function(enemy_attack) {
-      var damage = enemy_attack - unit.defense;
-      if (damage < 0)
-      {
-        damage = 0;
-      }
-      unit.health = unit.health - damage;
-  }
-
-  unit.set_info(name, health, attack, defense)
-  {
+function create_unit(name, health, attack, defense) {
+    var unit = {};
     unit.name = name;
     unit.health = health;
     unit.attack = attack;
     unit.defense = defense;
-  }
 
+    unit.take_damage = function(enemy_attack) {
+        var damage = enemy_attack - 0.1 * unit.defense;
+        if (damage < 0)
+        {
+          damage = 0;
+        }
+        unit.health = unit.health - damage;
+    }
 
-  return unit;
+    unit.take_reduced_damage = function(enemy_attack) {
+        var damage = enemy_attack - unit.defense;
+        if (damage < 0)
+        {
+          damage = 0;
+        }
+        unit.health = unit.health - damage;
+    }
+
+    unit.set_info = function(name, health, attack, defense) {
+        unit.name = name;
+        unit.health = health;
+        unit.attack = attack;
+        unit.defense = defense;
+    }
+
+    return unit;
 }
 
-
-
-//Returns level of player. Stats range from 0-100. Level ranges from  1-5
-function get_level(health, attack, defense)
-{
-	var avg = (health+attack+defense)/3;
-  var level = avg / 25;
-  return level + 1;
+function click_handler(num) {
+    switch (num) {
+        case 1:
+            button1();
+            break;
+        case 2:
+            button2();
+            break;
+        case 3:
+            button3();
+            break;
+        case 4:
+            button4();
+            break;
+        default:
+            console.log("Mr. Stark, I'm not feeling so good :/");
+    }
 }
 
+function button1() {
+    console.log(mode);
+	if (mode == START) {
+        document.getElementById("maintext").innerHTML = text1[i];
+        document.getElementById("button1").innerHTML = button[i];
+        i++;
+        if (i >= text1.length) {
+      	     i = 0;
+             mode = 1;
+         }
+	} else if (mode == ATTACK) {
+    	document.getElementById("maintext").innerHTML = "";
 
+        document.getElementById("orc_hp").innerHTML = "Enemy Hp: " + enemy_hp;
+        document.getElementById("orc_atk").innerHTML = "Enemy Atk: " + enemy_atk;
+        document.getElementById("player_hp").innerHTML = "Your HP: " + hero_hp;
+        document.getElementById("player_atk").innerHTML = "Your Atk: " + hero_atk;
+        document.getElementById("directions").innerHTML = "What will you do?";
 
-//combat
-if (mode==1) {
-	getElementById('button1').innerHTML= "Attack";
-  getElementById('button2').innerHTML= "Defend";
-  getElementById('button3').innerHTML= "Run";
-  getElementById('button4').innerHTML= "Hide";
-}
-//start menu
-else if (mode=0){
-	getElementById('button1').innerHTML= "Start Game";
-  getElementById('button2').innerHTML= "Quit";
-  getElementById('button3').innerHTML= "Feels Bad";
-  getElementById('button4').innerHTML= "-";
-}
-//discovery
-else if (mode==2) {
-  getElementById('button1').innerHTML= "Pick Up";
-  getElementById('button2').innerHTML= "Move On";
-  getElementById('button3').innerHTML= "-";
-  getElementById('button4').innerHTML= "-";
+        document.getElementById("button1").innerHTML = "Attack";
+        document.getElementById("button2").innerHTML = "Defend";
+        document.getElementById("button3").innerHTML = "Escape";
+        document.getElementById("button4").innerHTML = "---";
+    	mode = 2;
+    } else if (mode == 2) {
+    	document.getElementById("maintext").innerHTML = "You did 10 damage to the orc! You took 10 damage!";
+    	hero_hp -= 10;
+        document.getElementById("player_hp").innerHTML = "Your HP: " + hero_hp;
+        enemy_hp -= 10;
+        document.getElementById("orc_hp").innerHTML = "Enemy HP: " + enemy_hp;
+    }
 }
 else if (mode==3) {
     getElementById('button1').innerHTML= "Trade" + option;
