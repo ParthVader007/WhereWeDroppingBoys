@@ -55,6 +55,7 @@ function new_game_reset() {
     document.getElementById("player_hp").innerHTML = "";
     document.getElementById("player_atk").innerHTML = "";
     document.getElementById("directions").innerHTML = "";
+    kill_count = 0;
 }
 
 
@@ -104,6 +105,7 @@ function button1() {
         enemy_hp = getRandomArbitrary(60, 180);
         enemy_atk = getRandomArbitrary(5, 10)
         enemy = new Enemy(enemy_hp, enemy_atk, 0);
+        kill_count = 0;
         mode = STORY;
 
         document.getElementById("maintext").innerHTML = "Good luck and may fortune be in your favor!";
@@ -154,7 +156,7 @@ function button2() {
         document.getElementById("maintext").innerHTML = "";
         update_battle_info();
 
-        document.getElementById("maintext").innerHTML = "You protect yourself and take reduced damage!, you took " + enemy_atk*.1 + " damage!";
+        document.getElementById("maintext").innerHTML = "You protect yourself and take reduced damage!, you took " + Math.ceil(enemy_atk*.1) + " damage!";
         hero.hp -= Math.ceil(enemy.atk*.1);
         document.getElementById("player_hp").innerHTML = "Your HP: " + hero.hp;
         document.getElementById("orc_hp").innerHTML = "Enemy HP: " + enemy.hp;
