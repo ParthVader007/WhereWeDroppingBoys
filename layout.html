@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Insert Game Title</title>
+    <title>Where We Dropping Boys?</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link type="text/css" href="css/style.css" rel="stylesheet"/>
 
-    <!--<script src="script/functions.js"></script>-->
+    <script src="scripts/functions.js"></script>
     </head>
 
     <body>
+        <div class="header">
+            <h3 id="maintext"></h3>
+            <div class="stats-contain">
+                <div class="player-stats">
+                    <h3 id = "player_hp"></h3>
+                    <h3 id = "player_atk"></h3>
+                    <h3 id = "directions"></h3>
+                </div>
+                <div class="enemy-stats">
+                    <h3 id = "orc_hp"></h3>
+                    <h3 id = "orc_atk"></h3>
+                </div>
+            </div>
+        </div>
+        <div class="player-stats">
+            <p id="player_hp"></p>
+            <p id="player_atk"></p>
+        </div>
         <button type="button" id="settings" alt="gear">
             <img id="setting-image" src="assets/gear.png">
         </button>
 
         <!--<textarea placeholder="PLACEHOLDERRRR" style="margin: 0px; height: 275px; width:100%;"></textarea>-->
-        <img id="title-image" src="assets/annex.jpeg">
 
         <div class="buttons">
             <div class="option-contain">
-                <button class="options" type="button" id="button1" onclick="buttonFuntion(1)">Start Game</button>
+                <button class="options" type="button" id="button1" onclick="click_handler(1)">Start Game</button>
             </div>
             <div class="option-contain">
-                <button class="options" type="button" id="button2" onclick="buttonFuntion(2)">Quit</button>
+                <button class="options" type="button" id="button2" onclick="click_handler(2)">Quit</button>
             </div>
             <div class="option-contain">
-                <button class="options" type="button" id="button3" onclick="buttonFuntion(3)">Feels Bad</button>
+                <button class="options" type="button" id="button3" onclick="click_handler(3)">Feels Bad</button>
             </div>
             <div class="option-contain">
-                <button class="options" type="button" id="button4" onclick="buttonFuntion(4)">--</button>
+                <button class="options" type="button" id="button4" onclick="click_handler(4)">--</button>
             </div>
         </div>
 
         <footer>
             <p class="foot">Uncommon Hacks 2019</p>
-            
-            <ul class="list" style="list-style-type:none;">
-              <li class="item">Arvind Krishnan,</li>
-              <li class="item">Parth Patel,</li>
-              <li class="item">Aayush Patel,</li>
-              <li class="item">Kevin Li</li>
-            </ul>
+
+            <p class="foot">Arvind Krishnan, Parth Patel, Aayush Patel, Kevin Li</p>
         </footer>
     </body>
 </html>
