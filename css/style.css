@@ -30,11 +30,13 @@ body {
 }
 
 .player-stats {
+    padding-left: 20em;
     float: left;
     text-align: left;
 }
 
 .enemy-stats {
+    padding-right: 20em;
     margin-top: 50px;
     text-align: right;
 }
