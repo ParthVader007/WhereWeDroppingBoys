@@ -1,0 +1,72 @@
+body {
+    background-color: blue;
+}
+
+html {
+    src: url('./assets/comic.ttf');
+    font-family: comicsans;
+}
+
+#title-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.option-contain {
+    
+}
+
+.options {
+    width: 100%;
+    height: 12.5%;
+    color: green;
+    font-family: comicsans !important;
+    font-size: 22px;
+    background-color: #FF3300;
+}
+
+.options:hover {
+    background-color: green;
+    color: #FF3300;
+}
+
+#settings {
+    position:fixed;
+    width: 10%;
+    height: 5%;
+    right: 30px;
+    background-color: purple;
+}
+
+#settings:hover {
+    background-color: white;
+}
+
+.foot {
+    font-family: 'Raleway', sans-serif;
+	font-size: 12px;
+	text-align: center;
+    width:25%
+	padding:0;
+	margin: 0;
+	border:0;
+    color: yellow;
+}
+
+.item {
+    font-family: 'Raleway', sans-serif;
+	font-size: 12px;
+	text-align: center;
+    width:25%
+	padding:0;
+	margin: 0;
+	border:0;
+    display: inline-block;
+    color: yellow;
+}
+
+.list {
+  	text-align: center;
+}
