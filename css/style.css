@@ -11,8 +11,12 @@ body {
     color: white;
 }
 
-.stats-contain {
-    display: inline;
+#maintext {
+    text-align: center;
+}
+
+.combat-contain {
+    display: none;
 }
 
 .player-stats {
@@ -23,6 +27,10 @@ body {
 .enemy-stats {
     margin-top: 50px;
     text-align: right;
+}
+
+.buttons {
+    padding: 100px 0;
 }
 
 .option-contain {
@@ -49,7 +57,7 @@ body {
 }
 
 #settings {
-    position:fixed;
+    float: right;
     width: 50px;
     height: 50px;
     right: 30px;

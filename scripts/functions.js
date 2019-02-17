@@ -2,36 +2,31 @@ var mode = 0;
 var START = 0;
 var ATTACK = 1;
 var STORY = 2;
-
-var scenario = [];
-var button = [];
-var i = 0;
+var END = 3;
 
 var hero;
 var enemy;
-// var hero_hp = 100;
-// var hero_atk = 10;
-// var enemy_hp = 50;
-// var enemy_atk = 10;
 
-scenario[0] = "You have just woken up. You feel pain from the back of your head. As you sit up, you take a glance at your surroundings. You have almost no recollection of where you are or who you are.";
-button[0] = "Get Up";
-
-scenario[1] = "Just as you gather your thoughts, an orc bursts through the trees and lets out a furious war cry. You don't understand why the orc is angry or what he has against you, but instead of trying to figure that out you grab a nearby stick and prepare for combat.";
-button[1] = "Prepare for combat";
+function start_game() {
+    document.getElementById("maintext").innerHTML = "Fort Knight?";
+}
 
 function click_handler(num) {
     switch (num) {
         case 1:
+            update_mode();
             button1();
             break;
         case 2:
+            update_mode();
             button2();
             break;
         case 3:
+            update_mode();
             button3();
             break;
         case 4:
+            update_mode();
             button4();
             break;
         default:
@@ -39,13 +34,21 @@ function click_handler(num) {
     }
 }
 
+function create_units(player_name) {
+    hero = new Player("Player", 100, 20, 0);
+    enemy = new Enemy(50, 10, 0);
+}
+
+function update_mode() {
+    if (mode == START) {
+        create_units("Player");
+        mode = STORY;
+    }
+}
+
 function button1() {
     console.log(mode);
-    if (mode == START) {
-        hero = new Player("Player", 100, 20, 0);
-        enemy = new Enemy(50, 10, 0);
-        mode = STORY;
-    } else if (mode == STORY) {
+    if (mode == STORY) {
         document.getElementById("maintext").innerHTML = scenario[i];
         document.getElementById("option1").innerHTML = button[i];
         i++;
@@ -54,6 +57,7 @@ function button1() {
              mode = ATTACK;
          }
 	} else if (mode == ATTACK) {
+        document.getElementsByClassName("combat-contain").style.display = "inline";
     	document.getElementById("maintext").innerHTML = "";
 
         document.getElementById("orc_hp").innerHTML = "Enemy Hp: " + enemy.hp;
@@ -62,10 +66,7 @@ function button1() {
         document.getElementById("player_atk").innerHTML = "Your Atk: " + hero.atk;
         document.getElementById("directions").innerHTML = "What will you do?";
 
-        document.getElementById("option1").innerHTML = "Attack";
-        document.getElementById("option2").innerHTML = "Defend";
-        document.getElementById("option3").innerHTML = "Escape";
-        document.getElementById("option4").innerHTML = "---";
+        update_buttons("Attack", "Defend", "Escape", "---");
 
         console.log(hero.hp + ", " + enemy.hp);
         if (hero.hp > 0 && enemy.hp > 0) {
@@ -76,8 +77,23 @@ function button1() {
             enemy.hp -= hero.atk;
             document.getElementById("orc_hp").innerHTML = "Enemy HP: " + enemy.hp;
             console.log(hero.hp + ", " + enemy.hp);
-        } else {
-            mode = STORY;
+            if (enemy.hp <= 0) {
+                document.getElementById("maintext").innerHTML = "You killed the enemy!";
+                update_buttons("Continue", "---", "---", "---");
+                mode = STORY;
+            } else if (player.hp <= 0) {
+                document.getElementById("maintext").innerHTML = "You have died :(";
+                mode = END;
+            }
         }
+    } else if (mode == END) {
+        update_buttons();
     }
+}
+
+function update_buttons(opt1, opt2, opt3, opt4) {
+    document.getElementById("option1").innerHTML = opt1;
+    document.getElementById("option2").innerHTML = opt2;
+    document.getElementById("option3").innerHTML = opt3;
+    document.getElementById("option4").innerHTML = opt4;
 }
