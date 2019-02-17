@@ -13,6 +13,9 @@ var hero;
 var enemy;
 var enemy_hp;
 var enemy_atk;
+var attack_boost;
+
+var kill_count = 0;
 // var hero_hp = 100;
 // var hero_atk = 10;
 // var enemy_hp = 50;
@@ -24,6 +27,55 @@ function start_game() {
 
 function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function update_battle_info() {
+        document.getElementById("orc_hp").innerHTML = "Enemy Hp: " + enemy.hp;
+        document.getElementById("orc_atk").innerHTML = "Enemy Atk: " + enemy.atk;
+        document.getElementById("player_hp").innerHTML = "Your HP: " + hero.hp;
+        document.getElementById("player_atk").innerHTML = "Your Atk: " + hero.atk;
+        document.getElementById("directions").innerHTML = "What will you do?";
+
+        document.getElementById("option1").innerHTML = "Attack";
+        document.getElementById("option2").innerHTML = "Defend";
+        document.getElementById("option3").innerHTML = "Power Up";
+        document.getElementById("option4").innerHTML = "---";
+}
+
+function new_game_reset() {
+    //resets the buttons
+    document.getElementById("option1").innerHTML = "New Game";
+    document.getElementById("option2").innerHTML = "---";
+    document.getElementById("option3").innerHTML = "---";
+    document.getElementById("option4").innerHTML = "---";
+
+    //resets the screen
+    document.getElementById("orc_hp").innerHTML = "";
+    document.getElementById("orc_atk").innerHTML = "";
+    document.getElementById("player_hp").innerHTML = "";
+    document.getElementById("player_atk").innerHTML = "";
+    document.getElementById("directions").innerHTML = "";
+}
+
+
+function next_enemy() {
+    document.getElementById("maintext").innerHTML = "You killed the orc, but another appears!";
+    kill_count++;
+    document.getElementById("option1").innerHTML = "Next Enemy";
+    document.getElementById("option2").innerHTML = "---";
+    document.getElementById("option3").innerHTML = "---";
+    document.getElementById("option4").innerHTML = "---";
+
+    //resets the screen
+    document.getElementById("orc_hp").innerHTML = "";
+    document.getElementById("orc_atk").innerHTML = "";
+    document.getElementById("player_hp").innerHTML = "";
+    document.getElementById("player_atk").innerHTML = "";
+    document.getElementById("directions").innerHTML = "";
+    mode = TRANSITION;
+    enemy_hp = getRandomArbitrary(60, 120);
+    enemy_atk = getRandomArbitrary(5, 10)
+    enemy = new Enemy(enemy_hp, enemy_atk, 0);
 }
 
 function click_handler(num) {
@@ -58,11 +110,11 @@ function update_mode() {
     if (mode == START) {
         hero = new Player("Player", 120, 15, 0);
         enemy_hp = getRandomArbitrary(60, 180);
-        enemy_atk = getRandomArbitrary(5, 15)
+        enemy_atk = getRandomArbitrary(5, 10)
         enemy = new Enemy(enemy_hp, enemy_atk, 0);
         mode = STORY;
 
-        document.getElementById("maintext").innerHTML = "Game Initated";
+        document.getElementById("maintext").innerHTML = "Good luck and may fortune be in your favor!";
     } else if (mode == STORY) {
         document.getElementById("maintext").innerHTML = scenario[i];
         document.getElementById("option1").innerHTML = "Continue";
@@ -73,80 +125,89 @@ function update_mode() {
         }
     } else if (mode == TRANSITION) {
         document.getElementById("maintext").innerHTML = "Prepare for battle!";
-
-        document.getElementById("orc_hp").innerHTML = "Enemy Hp: " + enemy.hp;
-        document.getElementById("orc_atk").innerHTML = "Enemy Atk: " + enemy.atk;
-        document.getElementById("player_hp").innerHTML = "Your HP: " + hero.hp;
-        document.getElementById("player_atk").innerHTML = "Your Atk: " + hero.atk;
-        document.getElementById("directions").innerHTML = "What will you do?";
-
-        document.getElementById("option1").innerHTML = "Attack";
-        document.getElementById("option2").innerHTML = "Defend";
-        document.getElementById("option3").innerHTML = "Escape";
-        document.getElementById("option4").innerHTML = "---";
-
+        update_battle_info();
         mode = ATTACK;
 
     } else if (mode == ATTACK) {
         document.getElementById("maintext").innerHTML = "";
-
-        document.getElementById("orc_hp").innerHTML = "Enemy Hp: " + enemy.hp;
-        document.getElementById("orc_atk").innerHTML = "Enemy Atk: " + enemy.atk;
-        document.getElementById("player_hp").innerHTML = "Your HP: " + hero.hp;
-        document.getElementById("player_atk").innerHTML = "Your Atk: " + hero.atk;
-        document.getElementById("directions").innerHTML = "What will you do?";
-
-        update_buttons("Attack", "Defend", "Escape", "---");
+        update_battle_info();
 
 
-        console.log("Inside Attack loop");
         document.getElementById("maintext").innerHTML = "You did " + hero.atk + " damage to the orc! You took " + enemy.atk + " damage!";
         hero.hp -= enemy.atk;
         document.getElementById("player_hp").innerHTML = "Your HP: " + hero.hp;
         enemy.hp -= hero.atk;
         document.getElementById("orc_hp").innerHTML = "Enemy HP: " + enemy.hp;
-        console.log(hero.hp + ", " + enemy.hp);
 
+
+        //game lose function
         if (hero.hp <= 0) {
-            document.getElementById("maintext").innerHTML = "You Lost, Game Over!";
-
-            //resets the buttons
-            document.getElementById("option1").innerHTML = "New Game";
-            document.getElementById("option2").innerHTML = "---";
-            document.getElementById("option3").innerHTML = "---";
-            document.getElementById("option4").innerHTML = "---";
-
-            //resets the screen
-            document.getElementById("orc_hp").innerHTML = "";
-            document.getElementById("orc_atk").innerHTML = "";
-            document.getElementById("player_hp").innerHTML = "";
-            document.getElementById("player_atk").innerHTML = "";
-            document.getElementById("directions").innerHTML = "";
-
+            document.getElementById("maintext").innerHTML = "You Died Valiantly! In the end, you killed " + kill_count + " orcs";
+            new_game_reset();
             mode = START;
         }
         else if (enemy.hp <= 0) {
-            document.getElementById("maintext").innerHTML = "You WIN!";
-
-            //resets the buttons
-            document.getElementById("option1").innerHTML = "New Game";
-            document.getElementById("option2").innerHTML = "---";
-            document.getElementById("option3").innerHTML = "---";
-            document.getElementById("option4").innerHTML = "---";
-
-            //resets the screen
-            document.getElementById("orc_hp").innerHTML = "";
-            document.getElementById("orc_atk").innerHTML = "";
-            document.getElementById("player_hp").innerHTML = "";
-            document.getElementById("player_atk").innerHTML = "";
-            document.getElementById("directions").innerHTML = "";
-
-            mode = START;
+            next_enemy()
         }
 
     } else if (mode == GAMEOVER) {
         document.getElementById("maintext").innerHTML = "Welcome to the Glade!";
         document.getElementById("option1").innerHTML = "Continue";
         mode = STARTGAME;
+    }
+}
+
+function button2() {
+    if (mode == ATTACK) {
+        document.getElementById("maintext").innerHTML = "";
+        update_battle_info();
+
+        document.getElementById("maintext").innerHTML = "You protect yourself and take reduced damage!, you took " + enemy_atk*.1 + " damage!";
+        hero.hp -= Math.ceil(enemy.atk*.1);
+        document.getElementById("player_hp").innerHTML = "Your HP: " + hero.hp;
+        document.getElementById("orc_hp").innerHTML = "Enemy HP: " + enemy.hp;
+
+
+        //game lose function
+        if (hero.hp <= 0) {
+            document.getElementById("maintext").innerHTML = "You Died Valiantly! In the end, you killed " + kill_count + " orcs";
+            new_game_reset();
+
+            mode = START;
+        }
+        else if (enemy.hp <= 0) {
+            next_enemy();
+        }
+
+    }
+}
+
+
+function button3() {
+    if (mode == ATTACK) {
+        document.getElementById("maintext").innerHTML = "";
+        update_battle_info();
+
+        attack_boost = getRandomArbitrary(5, 10);
+        document.getElementById("maintext").innerHTML = "You Power Up! You increased your attack by " + attack_boost + "! However, you took " + enemy.atk + " damage while powering up!";
+        hero.atk += attack_boost;
+        hero.hp -= enemy.atk;
+        document.getElementById("player_hp").innerHTML = "Your HP: " + hero.hp;
+        document.getElementById("orc_hp").innerHTML = "Enemy HP: " + enemy.hp;
+        document.getElementById("player_atk").innerHTML = "Your Atk: " + hero.atk;
+
+
+        //game lose function
+        if (hero.hp <= 0) {
+            document.getElementById("maintext").innerHTML = "You Died Valiantly! In the end, you killed " + kill_count + " orcs";
+            new_game_reset();
+
+            mode = START;
+        }
+        else if (enemy.hp <= 0) {
+            next_enemy();
+
+        }
+
     }
 }
