@@ -5,6 +5,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link type="text/css" href="css/style.css" rel="stylesheet"/>
 
+    <script src="scripts/player.js"></script>
+    <script src="scripts/enemy.js"></script>
     <script src="scripts/functions.js"></script>
     </head>
 
@@ -13,15 +15,15 @@
             <h3 id="maintext"></h3>
             <div class="stats-contain">
                 <div class="player-stats">
-                    <h3 id = "player_hp"></h3>
-                    <h3 id = "player_atk"></h3>
-                    <h3 id = "directions"></h3>
+                    <h3 id = "player_hp">player_hp</h3>
+                    <h3 id = "player_atk">player_atk</h3>
                 </div>
                 <div class="enemy-stats">
-                    <h3 id = "orc_hp"></h3>
-                    <h3 id = "orc_atk"></h3>
+                    <h3 id = "orc_hp">orc_hp</h3>
+                    <h3 id = "orc_atk">orc_atk</h3>
                 </div>
             </div>
+            <h3 id = "directions">directions</h3>
         </div>
         <div class="player-stats">
             <p id="player_hp"></p>
@@ -35,16 +37,16 @@
 
         <div class="buttons">
             <div class="option-contain">
-                <button class="options" type="button" id="button1" onclick="click_handler(1)">Start Game</button>
+                <button class="options" type="button" id="option1" onclick="click_handler(1)">Start Game</button>
             </div>
             <div class="option-contain">
-                <button class="options" type="button" id="button2" onclick="click_handler(2)">Quit</button>
+                <button class="options" type="button" id="option2" onclick="click_handler(2)">Quit</button>
             </div>
             <div class="option-contain">
-                <button class="options" type="button" id="button3" onclick="click_handler(3)">Feels Bad</button>
+                <button class="options" type="button" id="option3" onclick="click_handler(3)">Feels Bad</button>
             </div>
             <div class="option-contain">
-                <button class="options" type="button" id="button4" onclick="click_handler(4)">--</button>
+                <button class="options" type="button" id="option4" onclick="click_handler(4)">--</button>
             </div>
         </div>
 

@@ -11,15 +11,18 @@ body {
     color: white;
 }
 
-/* .stats-contain {
-    display: none;
-} */
+.stats-contain {
+    display: inline;
+}
 
-#title-image {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+.player-stats {
+    float: left;
+    text-align: left;
+}
+
+.enemy-stats {
+    margin-top: 50px;
+    text-align: right;
 }
 
 .option-contain {
