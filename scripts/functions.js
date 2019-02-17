@@ -11,6 +11,28 @@ function button1Click() {
 }
 
 
+var scenarios = [];
+var options = [[],[]];
+
+scenarios[0] = "You have just woken up. You feel pain from the back of your head. As you sit up, you take a glance at your surroundings. You have almost no recollection of where you are or who you are.";
+options[0][0] = "Get Up";
+options[0][1] = "Go back to sleep";
+options[0][2] = "";
+options[0][3] = "";
+
+scenarios[1] = "Just as you gather your thoughts, an orc bursts through the trees and lets out a furious war cry. You don't understand why the orc is angry or what he has against you, but instead of trying to figure that out you grab a nearby stick and prepare for combat.";
+options[1][0] = "Prepare for combat";
+options[1][1] = "Go back to sleep";
+options[1][2] = "";
+options[1][3] = "";
+
+scenarios[1] = "You wake up even more confused and disoriented in an orc camp. Your arms and hands are bound together. “Hey” You turn your head to look at the source of the greeting and your eyes fall upon the image of a starved and malnourished man. As you focus your eyes, you realize you are in a tent of sorts. You also start to focus upon the smell of rotting flesh and human excrement. “So boy, you new here”? You start to open your mouth but then realize."
+options[1][0] = "";
+options[1][1] = "";
+options[1][2] = "";
+options[1][3] = "";
+
+
 function first_part(hero)
 {
   var text1 = "You have just woken up. You feel pain from the back of your head.";
