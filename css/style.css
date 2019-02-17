@@ -11,7 +11,17 @@ body {
     color: white;
 }
 
+#title {
+    font-size: 30px;
+    color: red;
+    text-align: center;
+}
+
 #maintext {
+    text-align: center;
+}
+
+#directions {
     text-align: center;
 }
 
