@@ -2,12 +2,6 @@ var mode = 0;
 var START = 0;
 var ATTACK = 1;
 var STORY = 2;
-<<<<<<< HEAD
-var END = 3;
-
-var hero;
-var enemy;
-=======
 var TRANSITION = 69;
 var GAMEOVER = 8
 
@@ -23,10 +17,6 @@ var enemy_atk;
 // var hero_atk = 10;
 // var enemy_hp = 50;
 // var enemy_atk = 10;
-
-scenario[0] = "You have just woken up. You feel pain from the back of your head. As you sit up, you take a glance at your surroundings. You have almost no recollection of where you are or who you are.";
-button[0] = "Get Up";
->>>>>>> 7dbad845c43bfd43b4f78a14daeb467ef223f8e3
 
 function start_game() {
     document.getElementById("maintext").innerHTML = "Fort Knight?";
