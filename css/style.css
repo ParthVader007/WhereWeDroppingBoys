@@ -1,5 +1,5 @@
 body {
-    background-image: url("assets/battlefield.jpeg");
+    background-color: black;
 }
 
 @font-face {
@@ -15,8 +15,8 @@ body {
     text-align: center;
 }
 
-.combat-contain {
-    display: none;
+.stats-contain {
+    display: inline;
 }
 
 .player-stats {

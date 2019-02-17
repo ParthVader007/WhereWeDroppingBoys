@@ -3,10 +3,14 @@ var START = 0;
 var ATTACK = 1;
 var STORY = 2;
 var TRANSITION = 69;
-var GAMEOVER = 8
+var GAMEOVER = 8;
 
 var scenario = [];
+scenario[0] = "You have just woken up. You feel pain from the back of your head. As you sit up, you take a glance at your surroundings. You have almost no recollection of where you are or who you are.";
+scenario[1] = "Just as you gather your thoughts, an orc bursts through the trees and lets out a furious war cry. You don't understand why the orc is angry or what he has against you, but instead of trying to figure that out you grab a nearby stick and prepare for combat.";
 var button = [];
+button[0] = "Get Up";
+button[1] = "Prepare for combat";
 var i = 0;
 
 var hero;
@@ -20,10 +24,6 @@ var kill_count = 0;
 // var hero_atk = 10;
 // var enemy_hp = 50;
 // var enemy_atk = 10;
-
-function start_game() {
-    document.getElementById("maintext").innerHTML = "Fort Knight?";
-}
 
 function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -81,19 +81,15 @@ function next_enemy() {
 function click_handler(num) {
     switch (num) {
         case 1:
-            update_mode();
             button1();
             break;
         case 2:
-            update_mode();
             button2();
             break;
         case 3:
-            update_mode();
             button3();
             break;
         case 4:
-            update_mode();
             button4();
             break;
         default:
@@ -101,12 +97,7 @@ function click_handler(num) {
     }
 }
 
-function create_units(player_name) {
-    hero = new Player("Player", 100, 20, 0);
-    enemy = new Enemy(50, 10, 0);
-}
-
-function update_mode() {
+function button1() {
     if (mode == START) {
         hero = new Player("Player", 120, 15, 0);
         enemy_hp = getRandomArbitrary(60, 180);
