@@ -10,3 +10,9 @@ function take_damage(player_atk) {
         this.hp = 0;
     }
 }
+
+function set_info(health, attack, defense) {
+    this.hp = health;
+    this.atk = attack;
+    this.def = defense;
+}
